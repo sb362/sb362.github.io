@@ -1,0 +1,95 @@
+{% extends "common.html" %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block head %}
+  <link href="{{ url_for('static', filename='styles/post.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+  <article id="post">
+    <header>
+      <h2><span id="title">{{ post.title }}</span></h2>
+      <h3><span id="subtitle">{{ post.subtitle }}</span></h3>
+      <hr>
+
+      <div id="separator">
+      {% if post.date %}
+        <div id="date">{{ post.date.strftime("%B %d, %Y") }}</div>
+      {% endif %}
+
+        <div id="view-all"><a class="hidden-link" href="/posts">View recent posts</a></div>
+      </div>
+
+      <br>
+      <hr>
+
+      <div id="image">
+      {% if post.image %}
+        <img src="{{ url_for('static', filename=post.image) }}">
+      {% endif %}
+      </div>
+    </header>
+
+    <section id="content">{{ post.html | safe }}</section>
+
+    <footer>
+      <hr>
+
+      <div id="other-posts">
+        <p>
+        {% if is_in_series %}
+          Other posts in this series
+        {% else %}
+          Most recent posts
+        {% endif %}
+        </p>
+
+        <ul id="other-posts">
+        {% for other_post in other_posts %}
+          <li>
+            <a class="hidden-link" href="/{{ other_post.path }}">
+              {% if other_post == post %}
+                <span class="post-reference"><b>{{ other_post.title }}</b></span>
+              {% else %}
+                <span class="post-reference">{{ other_post.title }}</span>
+              {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+
+          <li>
+            <a class="hidden-link" href="/posts">
+              <span class="post-reference">See all posts</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {% if prev_post or next_post %}
+      <hr>
+
+      <div id="other-post-info">
+        {% if prev_post %}
+        <div id="prev-post">
+          <a class="hidden-link" href="/{{ prev_post.path }}">
+            <span class="post-reference">&#9668; {{ prev_post.title }}</span>
+          </a>
+        </div>
+        {% endif %}
+
+        {% if next_post %}
+        <div id="next-post">
+          <a class="hidden-link" href="/{{ next_post.path }}">
+            <span class="post-reference">{{ next_post.title }} &#9658;</span>
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+    </footer>
+  </article>
+{% endblock %}

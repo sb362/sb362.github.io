@@ -1,0 +1,4 @@
+flask
+flask-flatpages
+frozen-flask
+Pygments

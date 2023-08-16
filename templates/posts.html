@@ -1,0 +1,17 @@
+{% extends "common.html" %}
+
+{% block title %}
+  Recent posts
+{% endblock %}
+
+{% block head %}
+  <link href="{{ url_for('static', filename='styles/posts.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+  {% if posts %}
+  <h2>Recent posts</h2>
+
+    {% include "_posts.html" %}
+  {% endif %}
+{% endblock %}

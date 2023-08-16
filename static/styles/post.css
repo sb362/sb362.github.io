@@ -1,0 +1,49 @@
+#post header #title {
+	font-size: 1.5em;
+
+	font-weight: bolder;
+}
+
+#post header #subtitle {
+	font-weight: lighter;
+}
+
+#post header #image {
+	display: flex;
+}
+
+#post header #image img {
+	max-width: 66%;
+	margin: auto;
+}
+
+#post header #separator #date {
+	float: left;
+}
+
+#post header #separator #view-all {
+	float: right;
+}
+
+#post footer #other-posts {
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+#post footer #prev-post {
+	float: left;
+}
+
+#post footer #next-post {
+	float: right;
+}
+
+#post footer .post-reference {
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+#post blockquote {
+	border-left: 0.25rem solid #e5e5e5;
+	color: #979797;
+	margin: .8rem 0;
+	padding: 0rem 1rem 0rem 1rem;
+}
