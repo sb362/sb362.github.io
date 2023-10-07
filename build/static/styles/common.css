@@ -1,0 +1,53 @@
+body {
+	display: block;
+	margin: 0 auto;
+	max-width: 800px;
+	width: 80%;
+}
+
+main {
+	font-family: 'Merriweather', serif;
+}
+
+nav {
+	font-family: 'Merriweather Sans', sans-serif;
+
+	text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+pre, code {
+	font-family: "Fira Code", monospace;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.hidden-link {
+	color: inherit;
+}
+
+nav ul {
+	list-style-type: none;
+
+	padding: 0px;
+}
+
+nav li {
+	display: inline;
+}
+
+nav a {
+	text-decoration: none;
+	color: inherit;
+
+	padding: 8px;
+}
+
+.centred-text {
+	text-align: center;
+}
