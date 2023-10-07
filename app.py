@@ -31,6 +31,7 @@ def sorted_posts():
     return sorted(unsorted_posts, key=lambda post: post.meta["date"], reverse=True)
 
 @app.route("/")
+@app.route("/index")
 def index():
     return render_template("index.html", posts=sorted_posts())
 
@@ -48,26 +49,27 @@ def post(post_path):
     
     unsorted_posts = (page for page in flat_pages if set(("date", "title")) <= page.meta.keys())
     sorted_posts = sorted(unsorted_posts, key=lambda post: post.meta["date"])
-    
-    path_parts = post_path.split("/")
-    series_path = len(path_parts) > 1 and path_parts[0]
-    is_in_series = bool(series_path)
 
-    if is_in_series:
-        other_posts = [post for post in sorted_posts if post.path.startswith("posts/" + series_path)]
-    else:
-        other_posts = sorted_posts[:3]
+    other_posts = sorted_posts[:5]
 
     i = sorted_posts.index(post)
     prev_post = i > 0 and sorted_posts[i - 1]
     next_post = i < (len(sorted_posts) - 1) and sorted_posts[i + 1]
 
-    return render_template("post.html", post=post, prev_post=prev_post, next_post=next_post,
-                           other_posts=other_posts, is_in_series=is_in_series)
+    return render_template("post.html", post=post, other_posts=other_posts,
+                           prev_post=prev_post, next_post=next_post)
+
+@freezer.register_generator
+def posts_generator():
+    for page in flat_pages:
+        yield "post", {"post_path": get_page_name(page)}
 
 @app.route('/pygments.css')
 def pygments_theme():
     return pygments_style_defs("colorful"), 200, {"Content-Type": "text/css"}
+
+def get_page_name(page):
+    return page.path[page.path.rfind('/') + 1:]
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "build":

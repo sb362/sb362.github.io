@@ -1,7 +1,7 @@
 
 <div class="post-list">
   {% for post in posts if not post.unlisted %}
-  <a class="hidden-link" href="/{{ post.path }}">
+  <a class="hidden-link" href="{{ url_for('post', post_path=post.path[post.path.rfind('/') + 1:]) }}">
     <div class="post">
       <div class="post-image">
     {% if post.image %}

@@ -20,7 +20,7 @@
         <div id="date">{{ post.date.strftime("%B %d, %Y") }}</div>
       {% endif %}
 
-        <div id="view-all"><a class="hidden-link" href="/posts">View recent posts</a></div>
+        <div id="view-all"><a class="hidden-link" href="{{ url_for('posts') }}">View recent posts</a></div>
       </div>
 
       <br>
@@ -50,7 +50,7 @@
         <ul id="other-posts">
         {% for other_post in other_posts %}
           <li>
-            <a class="hidden-link" href="/{{ other_post.path }}">
+            <a class="hidden-link" href="{{ url_for('post', post_path=other_post.path[other_post.path.rfind('/') + 1:]) }}">
               {% if other_post == post %}
                 <span class="post-reference"><b>{{ other_post.title }}</b></span>
               {% else %}
@@ -61,7 +61,7 @@
         {% endfor %}
 
           <li>
-            <a class="hidden-link" href="/posts">
+            <a class="hidden-link" href="{{ url_for('posts') }}">
               <span class="post-reference">See all posts</span>
             </a>
           </li>
@@ -74,7 +74,7 @@
       <div id="other-post-info">
         {% if prev_post %}
         <div id="prev-post">
-          <a class="hidden-link" href="/{{ prev_post.path }}">
+          <a class="hidden-link" href="{{ url_for('post', post_path=prev_post.path[prev_post.path.rfind('/') + 1:]) }}">
             <span class="post-reference">&#9668; {{ prev_post.title }}</span>
           </a>
         </div>
@@ -82,7 +82,7 @@
 
         {% if next_post %}
         <div id="next-post">
-          <a class="hidden-link" href="/{{ next_post.path }}">
+          <a class="hidden-link" href="{{ url_for('post', post_path=next_post.path[next_post.path.rfind('/') + 1:]) }}">
             <span class="post-reference">{{ next_post.title }} &#9658;</span>
           </a>
         </div>
