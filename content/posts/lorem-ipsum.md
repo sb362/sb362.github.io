@@ -8,7 +8,7 @@ Lorem ipsum dolor sit amet, consectetur *adipiscing elit*, sed do eiusmod tempor
 ## Hello world
 ### Hello world
 
-<img src="../static/images/nice.jpg" width="100%"/>
+<img src="../../static/images/nice.jpg" width="100%"/>
 <p style="text-align: center;"><b>Figure 1:</b> Nice at sunset</p>
 
 

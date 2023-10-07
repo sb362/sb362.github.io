@@ -31,19 +31,18 @@ def sorted_posts():
     return sorted(unsorted_posts, key=lambda post: post.meta["date"], reverse=True)
 
 @app.route("/")
-@app.route("/index")
 def index():
     return render_template("index.html", posts=sorted_posts())
 
-@app.route("/posts")
+@app.route("/posts/")
 def posts():
     return render_template("posts.html", posts=sorted_posts())
 
-@app.route("/about")
+@app.route("/about/")
 def about():
     return render_template("about.html")
 
-@app.route("/posts/<path:post_path>")
+@app.route("/post/<path:post_path>/")
 def post(post_path):
     post = flat_pages.get_or_404(f"posts/{post_path}")
     
@@ -62,6 +61,7 @@ def post(post_path):
 @freezer.register_generator
 def posts_generator():
     for page in flat_pages:
+        print(page)
         yield "post", {"post_path": get_page_name(page)}
 
 @app.route('/pygments.css')
@@ -73,6 +73,6 @@ def get_page_name(page):
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "build":
-        freezer.freeze()
+        freezer.run()
     else:
         app.run(debug=DEBUG)
